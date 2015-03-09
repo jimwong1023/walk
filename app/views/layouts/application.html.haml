@@ -1,0 +1,32 @@
+!!! 5
+%html{lang: "en"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+
+    %title
+      = content_for?(:title) ? yield(:title) : "WalkAwayt"
+
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "vendor/modernizr"
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body
+    %nav.top-bar{data: {topbar: {role: 'navigation'}}}
+      %ul.title-area
+        %li.name
+          %h1
+            %a{href: '/'} WalkAwayt
+      %section.top-bar-section
+        %ul.right
+          %li
+            - if current_user
+              %a.button{href: '/signout'}Log Out
+            - else
+              = form_for :session, url: sessions_path do |f|
+                =f.email_field :email, placeholder: "Email"
+                =f.password_field :password, placeholder: "Password"
+                =f.submit "Log in"
+
+    = yield

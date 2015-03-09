@@ -1,0 +1,8 @@
+%h1
+  = current_user.first_name
+
+%div.row
+  = form_for @business do |f| 
+    = f.label :name, 'Business Name:' 
+    = f.text_field :name, placeholder: 'Business Name' 
+    = f.submit 'Create Business' 
