@@ -7,26 +7,27 @@
     %title
       = content_for?(:title) ? yield(:title) : "WalkAwayt"
 
+    %link{ rel: "stylesheet", type: "text/css", href: "http://fonts.googleapis.com/css?family=Lato"}
     = stylesheet_link_tag    "application"
-    = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag "application", 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-  %body
-    %nav.top-bar{data: {topbar: {role: 'navigation'}}}
-      %ul.title-area
-        %li.name
-          %h1
-            %a{href: '/'} WalkAwayt
-      %section.top-bar-section
-        %ul.right
-          %li
-            - if current_user
-              %a.button{href: '/signout'}Log Out
-            - else
-              = form_for :session, url: sessions_path do |f|
-                =f.email_field :email, placeholder: "Email"
-                =f.password_field :password, placeholder: "Password"
-                =f.submit "Log in"
+  %body{style: "background: url(#{asset_path 'restaurant-bg.jpg'}) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;"}
+    %div{style: "height: 100%; width: 100%; position: fixed; top: 0, left: 0; background-color: rgba(0,0,0,0.40); color: #e7eaed; z-index: -1000;"}
+    %section.group.j-nav
+      .col.span_1_of_4.j-header.j-tc
+        %a.j-primary{href: '/'} WalkAwayt
+      .col.span_2_of_4
+      .col.span_1_of_4.j-tc
+        - if current_user
+          %a.button{href: '/signout'}Log Out
+        - else
+          %section
+            = form_for :session, url: sessions_path do |f|
+              =f.email_field :email, placeholder: "Email", class: "j-b-r-4"
+              =f.password_field :password, placeholder: "Password", class: "j-b-r-4"
+              =f.submit "Log in", class: "btn j-b-r-4 j-b-0", style: "margin-bottom: 1px;"
+          %section
+            %p Or Sign up
 
     = yield

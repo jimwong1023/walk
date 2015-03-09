@@ -12,10 +12,91 @@
  *
  *= require_tree .
  *= require_self
- *= require foundation_and_overrides
 
  */
 
+/* BUTTONS */
+
+.btn {
+  background-color: #2f4f4f;
+  color: white;
+  text-shadow: 1px 1px 3px #1c1b1c;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+/* BORDERS */
+
+.j-b-0 {
+  border: none;
+}
+
+.j-b-r-4 {
+  border-radius: 4px;
+}
+
+/* COLOR */
+.j-primary {
+  color: #2f4f4f;
+}
+
+/* FONT */
+.j-fs-large {
+  font-size: 30px;
+}
+
+.j-header {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* PADDING AND MARGIN */
+.j-p-large {
+  padding: 30px;
+}
+
+.j-p-medium {
+  padding: 20px;
+}
+
+.j-p-small {
+  padding: 15px;
+}
+
+.j-p-r-large {
+  padding-right: 30px;
+}
+
+.j-p-l-large {
+  padding-left: 30px;
+}
+
+.j-m-l-large {
+  margin-left: 30px;
+}
+
+/* POSITIONING */
+
+.j-tc {
+  text-align: center;
+}
+
+.j-float-right {
+  float: right;
+}
+
+/* NAV */
+
+.j-nav {
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #ebebeb;
+  background-color: white;
+}
+
+/* MISC */
 .j-ilb {
   display: inline-block;
 }
