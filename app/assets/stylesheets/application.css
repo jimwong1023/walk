@@ -53,6 +53,9 @@
 }
 
 /* PADDING AND MARGIN */
+.j-m-none {
+  margin: 0;
+}
 .j-p-large {
   padding: 30px;
 }
@@ -77,6 +80,14 @@
   margin-left: 30px;
 }
 
+.j-m-b-small {
+  margin-bottom: 15px;
+}
+
+.j-m-b-xsmall {
+  margin-bottom: 8px;
+}
+
 /* POSITIONING */
 
 .j-tc {
@@ -97,6 +108,22 @@
 }
 
 /* MISC */
+.j-errors {
+  border-radius: 5px;
+  background-color: #ffcccc;
+  padding: 10px;
+}
+
+.j-notices {
+  border-radius: 5px;
+  background-color: #CFDBC5;
+  padding: 10px;
+}
+
+.j-bg-white{
+  background-color: white;
+}
+
 .j-ilb {
   display: inline-block;
 }

@@ -1,12 +1,13 @@
 class SessionsController < ApplicationController
   def create
-    flash[:notice] = []
+    flash[:errors] = []
     if params[:session]
-      if user = User.find_by_email(params[:session][:email].downcase)
+      user = User.find_by_email(params[:session][:email].downcase)
+      if user && user.authenticate(params[:session][:password])
         login user
         return redirect_to user_path user
       else
-        flash[:notice] << "Invalid email or password"
+        flash[:errors] << "Invalid email or password"
       end
     end
     redirect_to root_url

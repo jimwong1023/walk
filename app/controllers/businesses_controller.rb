@@ -1,4 +1,5 @@
 class BusinessesController < ApplicationController
+  before_action :require_login, only: [:create, :show]
 
   def create
     business = Business.new(business_params)

@@ -19,15 +19,30 @@
         %a.j-primary{href: '/'} WalkAwayt
       .col.span_2_of_4
       .col.span_1_of_4.j-tc
-        - if current_user
+        - if is_logged_in?
           %a.button{href: '/signout'}Log Out
         - else
-          %section
+          %section.group{style: "margin-bottom: 3px;"}
             = form_for :session, url: sessions_path do |f|
               =f.email_field :email, placeholder: "Email", class: "j-b-r-4"
               =f.password_field :password, placeholder: "Password", class: "j-b-r-4"
               =f.submit "Log in", class: "btn j-b-r-4 j-b-0", style: "margin-bottom: 1px;"
-          %section
-            %p Or Sign up
+          %section.group
+            %p.j-ilb Or 
+            %span.j-ilb
+              %a{href: "/signup"}Sign up
+    - if flash[:errors] || flash[:notices]
+      %section.j-bg-white.j-p-medium
+        - if flash[:errors]
+          .j-errors
+            %ul
+              - flash[:errors].each do |m|
+                %li
+                  ="- #{m}"
+        - elsif flash[:notices]
+          %ul
+            - flash[:notices].each do |m|
+              %li
+                ="#{m}"
 
     = yield
