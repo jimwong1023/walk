@@ -22,7 +22,7 @@
             = "#{e.first_name} #{e.last_name}"
           - if e.active == 1
             = form_for e do |f|
-              = f.hidden_field :waitlist_id, value: @waitlist.id
+              = f.hidden_field :waitlist_id, value: @current_waitlist.id
               = f.hidden_field :active, value: 0
               = f.submit 'Clear'
 

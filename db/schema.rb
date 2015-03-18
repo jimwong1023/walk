@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150208205059) do
     t.integer  "user_id"
     t.integer  "current_waitlist_id"
     t.boolean  "open",                default: false
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

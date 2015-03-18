@@ -5,7 +5,7 @@ class BusinessesController < ApplicationController
     business = Business.new(business_params)
     business.owner = current_user
     if business.save
-      redirect_to business_path business
+      redirect_to "/businesses/#{business.slug}"
     else
       flash.now[:errors] = business.errors.full_messages
       redirect_to root_path
@@ -18,7 +18,7 @@ class BusinessesController < ApplicationController
   end
 
   def business
-    @business ||= Business.find_by_id(params[:id])
+    @business ||= Business.find_by_id(params[:id]) || Business.find_by_slug(params[:slug])
   end
 
   def current_waitlist
@@ -36,7 +36,7 @@ class BusinessesController < ApplicationController
     unless business.save
       flash.now[:errors] = business.errors.full_messages
     end
-    redirect_to business_path business
+    redirect_to "/businesses/#{business.slug}"
   end
 
   private

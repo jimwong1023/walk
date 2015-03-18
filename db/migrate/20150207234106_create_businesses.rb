@@ -5,6 +5,7 @@ class CreateBusinesses < ActiveRecord::Migration
       t.belongs_to :user
       t.integer :current_waitlist_id
       t.boolean :open, default: false
+      t.string :slug
 
       t.timestamps
     end

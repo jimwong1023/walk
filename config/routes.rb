@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resources :users, only: [:create, :show]
 
-  resources :businesses, only: [:create, :show] do
+  resources :businesses, only: [:create] do
     patch :toggle_open_close, on: :collection, as: :toggle_open_close
   end
 
   resources :entries, only: [:create, :update]
 
+  get 'businesses/:slug' => 'businesses#show'
   get 'signout', to: 'sessions#destroy', as: 'signout'
   get 'signup', to: 'homepage#signup', as: 'signup'
   # The priority is based upon order of creation: first created -> highest priority.
