@@ -7,24 +7,36 @@ class BusinessesController < ApplicationController
     if business.save
       redirect_to business_path business
     else
-      flash[:notice] = business.errors.full_messages
+      flash.now[:errors] = business.errors.full_messages
       redirect_to root_path
     end
   end
 
   def show
     business
-    waitlist
+    current_waitlist
   end
 
   def business
     @business ||= Business.find_by_id(params[:id])
   end
 
-  def waitlist
-    unless @waitlist ||= business.waitlist
-      @waitlist = business.waitlist = Waitlist.create(business_id: business.id)
+  def current_waitlist
+    unless @current_waitlist ||= business.current_waitlist
+      @current_waitlist = business.current_waitlist = Waitlist.create(business_id: business.id)
+      business.save
     end
+  end
+
+  def toggle_open_close
+    if business
+      business.open ? business.current_waitlist = nil : business.current_waitlist = current_waitlist
+      business.open = !business.open
+    end
+    unless business.save
+      flash.now[:errors] = business.errors.full_messages
+    end
+    redirect_to business_path business
   end
 
   private

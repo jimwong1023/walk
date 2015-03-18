@@ -1,0 +1,157 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+body {
+  font-family: 'Lato', serif;
+  color: #2f4f4f;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* BUTTONS */
+
+.btn {
+  background-color: #2f4f4f;
+  color: white;
+  text-shadow: 1px 1px 3px #1c1b1c;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+/* BORDERS */
+
+.j-b-0 {
+  border: none;
+}
+
+.j-b-r-4 {
+  border-radius: 4px;
+}
+
+.j-b-r-6 {
+  border-radius: 6px;
+}
+
+/* COLOR */
+.j-primary {
+  color: #2f4f4f !important;
+}
+
+/* FONT */
+.j-fs-large {
+  font-size: 30px;
+}
+
+.j-header {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.j-fw-bold {
+  font-weight: bold;
+}
+
+/* PADDING AND MARGIN */
+.j-m-none {
+  margin: 0;
+}
+.j-p-large {
+  padding: 30px;
+}
+
+.j-p-medium {
+  padding: 20px;
+}
+
+.j-p-small {
+  padding: 15px;
+}
+
+.j-p-r-large {
+  padding-right: 30px;
+}
+
+.j-p-l-large {
+  padding-left: 30px;
+}
+
+.j-m-t-large {
+  margin-top: 30px;
+}
+
+.j-m-t-small {
+  margin-top: 15px;
+}
+
+.j-m-r-small {
+  margin-right: 15px;
+}
+
+.j-m-t-medium {
+  margin-top: 20px;
+}
+
+.j-m-b-large {
+  margin-bottom: 30px;
+}
+
+.j-m-l-large {
+  margin-left: 30px;
+}
+
+.j-m-xlarge {
+  margin: 40px;
+}
+
+.j-m-b-small {
+  margin-bottom: 15px;
+}
+
+.j-m-b-xsmall {
+  margin-bottom: 8px;
+}
+
+.j-m-small {
+  margin: 15px;
+}
+
+/* POSITIONING */
+
+.j-tc {
+  text-align: center;
+}
+
+.j-float-right {
+  float: right;
+}
+
+/* NAV */
+
+.j-nav {
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #ebebeb;
+  background-color: white;
+}
+
+/* MISC */
+.j-bg-white{
+  background-color: white;
+}
+
+.j-bg-eggshell {
+  background-color: #f8f8f8;
+}
+
+.j-ilb {
+  display: inline-block;
+}

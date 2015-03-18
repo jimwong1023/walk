@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150208205059) do
   create_table "businesses", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
+    t.integer  "current_waitlist_id"
+    t.boolean  "open",                default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,8 +1,9 @@
-%h1
-  = current_user.try(:first_name)
+.container.j-m-t-large.j-bg-eggshell.j-b-r-4.j-tc
+  %h1
+    = current_user.try(:first_name)
 
-%div.row
-  = form_for @business do |f| 
-    = f.label :name, 'Business Name:' 
-    = f.text_field :name, placeholder: 'Business Name' 
-    = f.submit 'Create Business' 
+  %div.row
+    = form_for @business do |f| 
+      = f.label :name, 'Business Name:' 
+      = f.text_field :name, placeholder: 'Business Name' 
+      = f.submit 'Create Business' 

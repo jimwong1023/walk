@@ -2,24 +2,29 @@
 
 = Time.now.strftime("%A %m/%d/%y")
 
-%div
-  = form_for :user, url: {controller: "entries", action: 'create'}  do |f|
-    = f.text_field :first_name, placeholder: 'First Name'
-    = f.text_field :last_name, placeholder: 'Last Name'
-    = f.phone_field :phone_number, placeholder: 'Phone Number'
-    = f.hidden_field :waitlist_id, value: @waitlist.id
-    = f.submit 'Add to Waitlist'
-- if flash[:errors]
-  = flash[:errors].first
+- if @business.open
 
-%div
-  %ul
-    - @waitlist.entries.each do |e|
-      %li
-        %p
-          = "#{e.first_name} #{e.last_name}"
-        - if e.active == 1
-          = form_for e do |f|
-            = f.hidden_field :waitlist_id, value: @waitlist.id
-            = f.hidden_field :active, value: 0
-            = f.submit 'Clear'
+  %div
+    = form_for :user, url: {controller: "entries", action: 'create'}  do |f|
+      = f.text_field :first_name, placeholder: 'First Name'
+      = f.text_field :last_name, placeholder: 'Last Name'
+      = f.phone_field :phone_number, placeholder: 'Phone Number'
+      = f.hidden_field :waitlist_id, value: @current_waitlist.id
+      = f.submit 'Add to Waitlist'
+  - if flash[:errors]
+    = flash[:errors].first
+
+  %div
+    %ul
+      - @current_waitlist.entries.each do |e|
+        %li
+          %p
+            = "#{e.first_name} #{e.last_name}"
+          - if e.active == 1
+            = form_for e do |f|
+              = f.hidden_field :waitlist_id, value: @waitlist.id
+              = f.hidden_field :active, value: 0
+              = f.submit 'Clear'
+
+= form_for @business, url: {action: 'toggle_open_close', id: @business} do |f|
+  =f.submit "#{@business.open ? 'Close' : 'Open'}"

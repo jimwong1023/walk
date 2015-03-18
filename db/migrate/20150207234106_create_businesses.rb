@@ -3,6 +3,8 @@ class CreateBusinesses < ActiveRecord::Migration
     create_table :businesses do |t|
       t.string :name
       t.belongs_to :user
+      t.integer :current_waitlist_id
+      t.boolean :open, default: false
 
       t.timestamps
     end

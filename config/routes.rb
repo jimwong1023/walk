@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   resources :users, only: [:create, :show]
 
-  resources :businesses, only: [:create, :show]
+  resources :businesses, only: [:create, :show] do
+    patch :toggle_open_close, on: :collection, as: :toggle_open_close
+  end
 
   resources :entries, only: [:create, :update]
 

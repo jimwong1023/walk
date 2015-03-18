@@ -1,11 +1,14 @@
-%h2 Sign Up
-= form_for :user, :url => users_path do |f|
-	= f.label :first_name, 'First Name:'
-	= f.text_field :first_name, placeholder: "First Name"
-	= f.label :last_name, 'Last Name:'
-	= f.text_field :last_name, placeholder: "Last Name"
-	= f.label :email, 'Email:'
-	= f.email_field :email, placeholder: "email"
-	= f.label :password, 'Password'
-	= f.password_field :password, placeholder: "password"
-	= f.submit "Sign up!"
+.container.j-m-t-large.j-bg-eggshell.j-b-r-4.j-tc
+  %h1.j-m-b-large.j-primary
+    Sign Up
+  = form_for :user, :url => users_path, html: {class: "j-tc j-m-b-large"} do |f|
+    .row.j-m-b-small
+      = f.text_field :first_name, placeholder: "First Name", class: "j-b-r-4"
+    .row.j-m-b-small
+      = f.text_field :last_name, placeholder: "Last Name", class: "j-b-r-4"
+    .row.j-m-b-small
+      = f.email_field :email, placeholder: "Email", class: "j-b-r-4"
+    .row.j-m-b-small
+      = f.password_field :password, placeholder: "Password", class: "j-b-r-4"
+    .row.j-m-t-small
+      = f.submit "Sign up!", class: "btn j-b-r-4"
