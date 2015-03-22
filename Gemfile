@@ -28,6 +28,7 @@ gem 'pry-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'haml', '~> 4.0.6'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
+gem 'twilio-ruby', '~> 3.12'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

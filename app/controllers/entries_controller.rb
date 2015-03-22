@@ -27,7 +27,7 @@ class EntriesController < ApplicationController
       flash[:errors] = @entry.errors.full_messages if @entry
     end
 
-    redirect_to business_path @business
+    redirect_to "/businesses/#{@business.slug}"
   end
 
   def update
@@ -40,7 +40,7 @@ class EntriesController < ApplicationController
     @waitlist = Waitlist.find_by_id(params[:entry][:waitlist_id])
     @business = @waitlist.business
 
-    redirect_to business_path @business
+    redirect_to "/businesses/#{@business.slug}"
   end
 
   private
