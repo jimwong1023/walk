@@ -2,41 +2,43 @@ class BusinessesController < ApplicationController
   before_action :require_login, only: [:create, :show]
 
   def create
-    biz = Business.new(business_params)
-    biz.owner = current_user
-    if biz.save
-      redirect_to "/businesses/#{biz.slug}"
-    else
-      flash.now[:errors] = biz.errors.full_messages
+    service.create(business_params, current_user)
+
+    if service.resource.errors.full_messages.length > 0
+      flash[:errors] = service.resource.errors.full_messages
       redirect_to root_path
+    else
+      redirect_to "/businesses/#{service.resource.slug}"
     end
   end
 
   def show
-    business
+    resource
     current_waitlist
   end
 
-  def business
-    @business ||= Business.find_by_id(params[:id]) || Business.find_by_slug(params[:slug])
+  def resource
+    @resource ||= Business.find_by_id(params[:id]) || Business.find_by_slug(params[:slug])
   end
 
   def current_waitlist
-    unless @current_waitlist ||= business.current_waitlist
-      @current_waitlist = business.current_waitlist = Waitlist.create(business_id: business.id)
-      business.save
+    unless @current_waitlist ||= resource.current_waitlist
+      @current_waitlist = resource.current_waitlist = Waitlist.create(business_id: resource.id)
+      resource.save
     end
   end
 
   def toggle_open_close
-    if business
-      business.open ? business.current_waitlist = nil : business.current_waitlist = current_waitlist
-      business.open = !business.open
+    service.toggle_open_close
+
+    if service.resource.errors.full_messages.length > 0
+      flash[:errors] = service.resource.errors.full_messages
     end
-    unless business.save
-      flash.now[:errors] = business.errors.full_messages
-    end
-    redirect_to "/businesses/#{business.slug}"
+    redirect_to "/businesses/#{resource.slug}"
+  end
+
+  def service
+    @service ||= Services::BusinessService.new(resource)
   end
 
   private

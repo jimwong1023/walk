@@ -1,8 +1,8 @@
-= @business.name
+= @resource.name
 
 = Time.now.strftime("%A %m/%d/%y")
 
-- if @business.open
+- if @resource.open
 
   %div
     = form_for :user, url: {controller: "entries", action: 'create'}  do |f|
@@ -16,7 +16,7 @@
 
   %div
     %ul
-      - @current_waitlist.entries.each do |e|
+      - @current_waitlist.entries.where(active: 1).order(created_at: :asc).each do |e|
         %li
           %p
             = "#{e.first_name} #{e.last_name}"
@@ -26,5 +26,5 @@
               = f.hidden_field :active, value: 0
               = f.submit 'Clear'
 
-= form_for @business, url: {action: 'toggle_open_close', id: @business} do |f|
-  =f.submit "#{@business.open ? 'Close' : 'Open'}"
+= form_for @resource, url: {action: 'toggle_open_close', id: @resource} do |f|
+  =f.submit "#{@resource.open ? 'Close' : 'Open'}"
