@@ -14,7 +14,30 @@ class Business < ActiveRecord::Base
     end
   }
 
+  def toggle_open_close
+    self.open = !self.open
+    self.save
+  end
+
+  def current_waitlist_with_initialize
+    if self.open
+      current_waitlist_without_initialize || create_waitlist
+    else
+      self.current_waitlist = nil
+      self.save
+      return nil
+    end
+  end
+
+  alias_method_chain :current_waitlist, :initialize
+
   private
+    def create_waitlist
+      self.current_waitlist = Waitlist.create(business_id: self.id)
+      self.save
+      return self.current_waitlist
+    end
+
     def get_unique_slug(slug)
       slugs = Business.where("slug LIKE ?", "#{slug}%").pluck(:slug)
       if slugs.empty?

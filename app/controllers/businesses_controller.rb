@@ -2,13 +2,14 @@ class BusinessesController < ApplicationController
   before_action :require_login, only: [:create, :show]
 
   def create
-    service.create(business_params, current_user)
+    business = Business.new(business_params)
+    business.owner = current_user
 
-    if service.resource.errors.full_messages.length > 0
-      flash[:errors] = service.resource.errors.full_messages
-      redirect_to root_path
+    if business.save
+      redirect_to "/businesses/#{business.slug}"
     else
-      redirect_to "/businesses/#{service.resource.slug}"
+      flash[:errors] = business.errors.full_messages
+      redirect_to root_path
     end
   end
 
@@ -21,24 +22,18 @@ class BusinessesController < ApplicationController
     @resource ||= Business.find_by_id(params[:id]) || Business.find_by_slug(params[:slug])
   end
 
-  def current_waitlist
-    unless @current_waitlist ||= resource.current_waitlist
-      @current_waitlist = resource.current_waitlist = Waitlist.create(business_id: resource.id)
-      resource.save
-    end
-  end
-
   def toggle_open_close
-    service.toggle_open_close
+    resource.toggle_open_close
 
-    if service.resource.errors.full_messages.length > 0
-      flash[:errors] = service.resource.errors.full_messages
-    end
     redirect_to "/businesses/#{resource.slug}"
   end
 
-  def service
-    @service ||= Services::BusinessService.new(resource)
+  def current_waitlist
+    @current_waitlist ||= resource.current_waitlist
+  end
+
+  def business_service
+    @business_service ||= Services::BusinessService.new(resource)
   end
 
   private
