@@ -2,13 +2,15 @@ class BusinessesController < ApplicationController
   before_action :require_login, only: [:create, :show]
 
   def create
+    flash[:errors] = []
+    
     business = Business.new(business_params)
     business.owner = current_user
 
     if business.save
       redirect_to "/businesses/#{business.slug}"
     else
-      flash[:errors] = business.errors.full_messages
+      flash[:errors] << business.errors.full_messages
       redirect_to root_path
     end
   end
@@ -30,10 +32,6 @@ class BusinessesController < ApplicationController
 
   def current_waitlist
     @current_waitlist ||= resource.current_waitlist
-  end
-
-  def business_service
-    @business_service ||= Services::BusinessService.new(resource)
   end
 
   private

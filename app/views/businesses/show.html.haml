@@ -11,8 +11,6 @@
       = f.phone_field :phone_number, placeholder: 'Phone Number'
       = f.hidden_field :waitlist_id, value: @current_waitlist.id
       = f.submit 'Add to Waitlist'
-  - if flash[:errors]
-    = flash[:errors].first
 
   %div
     %ul
